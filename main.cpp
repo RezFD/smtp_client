@@ -28,7 +28,7 @@ int main() {
         connection_server->handshake();
         connection_server->tls_handshake();
         connection_server->login(config["UserName"].get_string(), config["Password"].get_string());
-        connection_server->mail_send("nitrozeusdev@gmail.com", "Test", "Mail Send.");
+        connection_server->mail_send("patronplatform@gmail.com", "Test", "Mail Send.");
         connection_server->closed();
     } catch (SmtpError & e) {
         std::cout << e.what() << std::endl;
