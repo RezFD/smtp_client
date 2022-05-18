@@ -6,4 +6,4 @@
 *.pem
 
 # Mail Password
-user.json
+config.json
