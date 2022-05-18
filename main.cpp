@@ -10,7 +10,7 @@ using namespace ::types;
 using namespace ::deserializer;
 
 int main() {
-    Json config(load("../config.json"));
+    Json config (load("../config.json"));
     struct addrinfo hints {AI_PASSIVE, AF_UNSPEC, SOCK_STREAM};
     struct addrinfo * smtp_server_info;
     int status;
@@ -27,7 +27,7 @@ int main() {
     try {
         connection_server->handshake();
         connection_server->tls_handshake();
-        connection_server->login(config["Username"].get_string(), config["Password"].get_string());
+        connection_server->login(config["UserName"].get_string(), config["Password"].get_string());
         connection_server->mail_send("nitrozeusdev@gmail.com", "Test", "Mail Send.");
         connection_server->closed();
     } catch (SmtpError & e) {
