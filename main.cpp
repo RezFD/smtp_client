@@ -3,6 +3,8 @@
 #include "arpa/inet.h"
 #include "smtp_server.h"
 
+using namespace smtp;
+
 int main() {
     const char host_address [] {"smtp.gmail.com"};
     const char port [] {"587"};

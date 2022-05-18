@@ -3,10 +3,10 @@
 #define SMTP_CLIENT_CONNECTION_ERROR_H
 
 #include "smtp_error.h"
-
-class ConnectionError : public SmtpError {
-public:
-    const char * what() const noexcept override;
-};
-
+namespace smtp::exceptions {
+    class ConnectionError : public SmtpError {
+    public:
+        const char * what() const noexcept override;
+    };
+}
 #endif //SMTP_CLIENT_CONNECTION_ERROR_H

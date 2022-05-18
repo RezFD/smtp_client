@@ -3,8 +3,9 @@
 #define SMTP_CLIENT_SMTP_ERROR_H
 
 #include <exception>
-
-class SmtpError : public std::exception {};
-
+namespace smtp::exceptions {
+    class SmtpError : public std::exception {
+    };
+}
 
 #endif //SMTP_CLIENT_SMTP_ERROR_H

@@ -23,38 +23,44 @@
 #include "exceptions/mail_error.h"
 #include "exceptions/auth_error.h"
 
-using namespace constants;
 
-class SmtpServer {
-private:
-    const std::string END_FRAMING_MESSAGE = "\r\n";
+namespace smtp {
+    using namespace constants;
+    using namespace exceptions;
+    using namespace encoder;
 
-    int fd;
-    struct sockaddr * addr;
-    socklen_t len;
+    class SmtpServer {
+    private:
+        const std::string END_FRAMING_MESSAGE = "\r\n";
 
-    SSL_CTX * ssl_ctx;
-    SSL * c_ssl;
+        int fd;
+        struct sockaddr * addr;
+        socklen_t len;
 
-    std::string sender_mail;
+        SSL_CTX * ssl_ctx;
+        SSL * c_ssl;
 
-    static bool check_status_code(const char * msg, const char * code) noexcept;
-    void initialize_ssl() const;
-    void shutdown_ssl() const;
+        std::string sender_mail;
 
-public:
-    SmtpServer(addrinfo * info);
-    SmtpServer(SmtpServer & server) = delete;
-    SmtpServer(SmtpServer && server) noexcept;
-    ~SmtpServer();
-    void send_message(const std::string & msg, bool is_split=false, bool is_ssl=false) const;
-    std::string receive_message(bool is_ssl=false) const;
-    void handshake() const;
-    void login(const std::string & username, const std::string & password);
-    void tls_handshake();
-    void mail_send(const std::string & recv_mail_address, const std::string & subject, const std::string & body) const;
-    void closed() const;
+        static bool check_status_code(const char * msg, const char * code) noexcept;
+        void initialize_ssl() const;
+        void shutdown_ssl() const;
 
-};
+    public:
+        SmtpServer(addrinfo * info);
+        SmtpServer(SmtpServer & server) = delete;
+        SmtpServer(SmtpServer && server) noexcept;
+        ~SmtpServer();
+        void send_message(const std::string & msg, bool is_split = false, bool is_ssl = false) const;
+        std::string receive_message(bool is_ssl = false) const;
+        void handshake() const;
+        void login(const std::string & username, const std::string & password);
+        void tls_handshake();
+        void
+        mail_send(const std::string & recv_mail_address, const std::string & subject, const std::string & body) const;
+        void closed() const;
 
+    };
+
+}
 #endif //SMTP_CLIENT_SMTP_SERVER_H
