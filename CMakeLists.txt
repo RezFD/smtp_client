@@ -16,6 +16,13 @@ add_executable(
         src/exceptions/mail_error.cpp
         src/exceptions/auth_error.cpp
 )
+
+# OpenSSL Link
 find_package(OpenSSL REQUIRED)
 target_link_libraries(smtp_client OpenSSL::SSL)
+
+# Simple Json
+find_package(simple-json 0.1.0 REQUIRED)
+target_link_libraries(smtp_client simple-json)
+
 target_include_directories(smtp_client PRIVATE include)

@@ -1,17 +1,25 @@
 #include <iostream>
 #include <netdb.h>
 #include "arpa/inet.h"
+#include "simple_json.h"
 #include "smtp_server.h"
 
 using namespace smtp;
+using namespace simple_json;
+using namespace ::types;
+using namespace ::deserializer;
 
 int main() {
-    const char host_address [] {"smtp.gmail.com"};
-    const char port [] {"587"};
+    Json config(load("../config.json"));
     struct addrinfo hints {AI_PASSIVE, AF_UNSPEC, SOCK_STREAM};
     struct addrinfo * smtp_server_info;
     int status;
-    if ((status = getaddrinfo(host_address, port, & hints, & smtp_server_info)) != 0) {
+    if ((status = getaddrinfo(
+            config["SmtpAddress"].get_string().c_str(),
+            config["Port"].get_string().c_str(),
+            & hints,
+            & smtp_server_info
+    )) != 0) {
         std::cout << "DNS resolve failed : " << gai_strerror(status) << std::endl;
         return 1;
     }
@@ -19,7 +27,7 @@ int main() {
     try {
         connection_server->handshake();
         connection_server->tls_handshake();
-        connection_server->login("r.fooladvand77@gmail.com", "");
+        connection_server->login(config["Username"].get_string(), config["Password"].get_string());
         connection_server->mail_send("nitrozeusdev@gmail.com", "Test", "Mail Send.");
         connection_server->closed();
     } catch (SmtpError & e) {
