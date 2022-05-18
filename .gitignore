@@ -6,4 +6,4 @@
 *.pem
 
 # Mail Password
-password.*
+password.json
