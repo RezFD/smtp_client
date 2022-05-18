@@ -11,6 +11,8 @@ namespace smtp::exceptions {
                 return "Invalid Username !?";
             case AuthErrorType::INVALID_AUTHENTICATION:
                 return "Invalid Username or Password !?";
+            default:
+                return "AuthError !?";
         }
     }
 }

@@ -62,7 +62,7 @@ namespace smtp {
     }
 
     std::string SmtpServer::receive_message(bool is_ssl) const {
-        char tmp_buf[1024] = {};
+        char tmp_buf[1024] {};
         std::string buf;
         ssize_t recv_size;
         while ((recv_size = is_ssl ? SSL_read(c_ssl, tmp_buf, 1024) : recv(fd, tmp_buf, 1024, 0)) > 0) {

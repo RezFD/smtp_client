@@ -6,7 +6,6 @@ namespace smtp::exceptions {
 
     const char * MailError::what() const noexcept {
         switch (error_type) {
-
             case MailErrorType::INVALID_FROM_EMAIL:
                 return "Invalid FROM Email.";
             case MailErrorType::INVALID_RCPT_EMAIL:
@@ -15,6 +14,8 @@ namespace smtp::exceptions {
                 return "Failed Data Command.";
             case MailErrorType::INVALID_BODY:
                 return "Invalid Body Mail.";
+            default:
+                return "MailError !?";
         }
     }
 }

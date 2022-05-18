@@ -9,7 +9,6 @@ namespace smtp::constants::status_codes {
         const char ACTION_COMPLETE [] {"250"};
         const char AUTH [] {"334"};
         const char START_MAIL_INPUT [] {"354"};
-        const char USER_UNKNOWN [] {"550"};
     }
 
 #endif //SMTP_CLIENT_SMTP_CONSTANTS_H

@@ -2,6 +2,6 @@
 
 namespace smtp::exceptions {
     const char * HandshakingError::what() const noexcept {
-        return "handshaking failed !";
+        return "handshaking failed !?";
     }
 }
