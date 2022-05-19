@@ -6,18 +6,6 @@ namespace smtp {
                                               len {info->ai_addrlen} {
         initialize_ssl();
         ssl_ctx = SSL_CTX_new(TLS_client_method());
-        if (SSL_CTX_use_certificate_file(ssl_ctx, "../cert.pem", SSL_FILETYPE_PEM) <= 0) {
-            ERR_print_errors_fp(stderr);
-            abort();
-        }
-        if (SSL_CTX_use_PrivateKey_file(ssl_ctx, "../key.pem", SSL_FILETYPE_PEM) <= 0) {
-            ERR_print_errors_fp(stderr);
-            abort();
-        }
-        if (!SSL_CTX_check_private_key(ssl_ctx)) {
-            fprintf(stderr, "Private key does not match the public certificate\n");
-            abort();
-        }
         c_ssl = SSL_new(ssl_ctx);
         SSL_set_fd(c_ssl, fd);
         if (connect(fd, addr, len) == -1) {
