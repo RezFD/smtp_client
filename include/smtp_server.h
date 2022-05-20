@@ -56,8 +56,9 @@ namespace smtp {
         void handshake() const;
         void login(const std::string & username, const std::string & password);
         void tls_handshake();
-        void
-        mail_send(const std::string & recv_mail_address, const std::string & subject, const std::string & body) const;
+        void mail_send(
+                const std::string & recv_mail_address, const std::string & subject, const std::string & body
+        ) const;
         void closed() const;
 
     };
