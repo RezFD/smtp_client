@@ -47,7 +47,7 @@ namespace smtp {
         void shutdown_ssl() const;
 
     public:
-        SmtpServer(addrinfo * info);
+        explicit SmtpServer(addrinfo * info);
         SmtpServer(SmtpServer & server) = delete;
         SmtpServer(SmtpServer && server) noexcept;
         ~SmtpServer();
