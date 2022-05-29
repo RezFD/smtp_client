@@ -20,7 +20,7 @@ int main() {
             & hints,
             & smtp_server_info
     )) != 0) {
-        std::cout << "DNS resolve failed : " << gai_strerror(status) << std::endl;
+        std::cerr << "DNS resolve failed : " << gai_strerror(status) << std::endl;
         return 1;
     }
     SmtpServer * connection_server {new SmtpServer {smtp_server_info}};
