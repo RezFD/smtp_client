@@ -98,10 +98,10 @@ namespace smtp {
             const std::string & recv_mail_address, const std::string & subject, const std::string & body
     ) const {
 
-        send_message("MAIL FROM:<" + sender_mail + ">", false, true);
+        send_message("MAIL FROM: <" + sender_mail + ">", false, true);
         if (!check_status_code(receive_message(true).c_str(), status_codes::ACTION_COMPLETE))
             throw MailError {MailErrorType::INVALID_FROM_EMAIL};
-        send_message("RCPT TO:<" + recv_mail_address + ">", false, true);
+        send_message("RCPT TO: <" + recv_mail_address + ">", false, true);
         if (!check_status_code(receive_message(true).c_str(), status_codes::ACTION_COMPLETE))
             throw MailError {MailErrorType::INVALID_RCPT_EMAIL};
         std::cout << "Set Sender And Receiver." << std::endl;
@@ -110,7 +110,7 @@ namespace smtp {
             throw MailError {MailErrorType::FAILED_DATA_COMMAND};
 
         std::stringstream mail_body;
-        mail_body << "Mail From: John Q. Public <" << sender_mail << ">\n"
+        mail_body << "Mail From: <" << sender_mail << ">\n"
                   << "Subject:" << subject << "\n"
                   << "To:" << recv_mail_address << "\n\n"
                   << body;
