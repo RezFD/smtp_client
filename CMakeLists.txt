@@ -26,3 +26,4 @@ find_package(simple-json 0.2.1 REQUIRED)
 target_link_libraries(smtp_client simple-json)
 
 target_include_directories(smtp_client PRIVATE include)
+
